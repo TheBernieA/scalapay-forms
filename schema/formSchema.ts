@@ -1,5 +1,5 @@
+import { differenceInYears, isValid } from "date-fns";
 import { z } from "zod";
-import { isValid, parseISO, differenceInYears } from "date-fns";
 
 export const step1Schema = z.object({
   email: z.string().email("Email is not valid, please enter a valid email"),
@@ -31,7 +31,7 @@ export const step2Schema = z.object({
   postalCode: z.string().min(4, "CAP is not valid").max(10, "CAP is not valid"),
   province: z.string().min(1, "Province is required"),
   city: z.string().min(1, "City is required"),
-  country: z.string(),
+  country: z.string().min(1, "Please select country from dropdown"),
   currentlyLiveHere: z.boolean().optional(),
   isPEP: z.boolean().optional(),
 });

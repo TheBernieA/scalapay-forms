@@ -1,19 +1,15 @@
 import { countries } from '@/lib/countries';
-import { faqIcon } from '@/public/assets/icons';
+import { faqIcon, infoIcon } from '@/public/assets/icons';
 import { step2Schema } from '@/schema/formSchema';
 import Button from '@/shared/components/Button';
+import DropdownInput from '@/shared/components/Dropdown';
 import FormHeader from '@/shared/components/FormHeader';
 import InputField from '@/shared/components/InputField';
-import SelectField from '@/shared/components/SelectField';
 import Toggle from '@/shared/components/Toggle';
-import Switcher2 from '@/shared/components/Toggle2';
 import Wrapper from '@/shared/components/Wrapper';
-import { AppDispatch } from '@/store';
-import { goToStep } from '@/store/formSlice';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Image from 'next/image';
 import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
 
 interface FormStepTwoProps {
     onSubmit: (data: any) => void;
@@ -21,7 +17,7 @@ interface FormStepTwoProps {
 }
 
 function FormStepTwo({ onSubmit, defaultValues }: FormStepTwoProps) {
-    const { register, watch, handleSubmit, formState: { errors, isSubmitting } } = useForm({
+    const { register, watch, handleSubmit, setValue, formState: { errors, isSubmitting } } = useForm({
         resolver: zodResolver(step2Schema),
         defaultValues,
         mode: 'onChange',
@@ -31,13 +27,17 @@ function FormStepTwo({ onSubmit, defaultValues }: FormStepTwoProps) {
     const currentlyLiveHere = watch('currentlyLiveHere', defaultValues?.currentlyLiveHere)
     const isPEP = watch('isPEP', defaultValues?.isPEP)
 
+    const handleCountrySelect = (country: { code: string; name: string }) => {
+        setValue('country', country.code)
+    }
+
     return (
         <form onSubmit={handleSubmit(onSubmit)} className='w-full h-full flex flex-col'>
             <FormHeader />
             <Wrapper className='p-4'>
                 <div className="flex gap-[5px] items-center mb-3">
                     <h2 className='text-text-primary font-semibold text-[15px] leading-[160%] tracking-[0%] '>Indirizzo di residenza</h2>
-                    <Image src={faqIcon} alt='faq-icon' className='size-[16px]' />
+                    <Image src={faqIcon} alt='faq-icon' className='size-[18.2px]' />
                 </div>
                 <div className='flex flex-col gap-4 mt-2'>
                     <div className="grid grid-cols-3 gap-4 items-start">
@@ -106,19 +106,14 @@ function FormStepTwo({ onSubmit, defaultValues }: FormStepTwoProps) {
                             "aria-label": "City"
                         }}
                     />
-                    <SelectField
+                    <DropdownInput
                         id='country'
-                        label='Country'
-                        name='country'
-                        register={register}
-                        countryObject={countries}
-                        placeholder='select a country'
+                        placeholder='Nazione'
+                        data={countries}
+                        onSelect={handleCountrySelect}
                         error={errors?.country}
-                        inputProps={{
-                            "aria-labelledby": "country",
-                            "aria-label": "Country"
-                        }}
                     />
+                    <input type="hidden" {...register("country")} />
 
                     <Toggle
                         id='currentlyLiveHere'
@@ -134,6 +129,7 @@ function FormStepTwo({ onSubmit, defaultValues }: FormStepTwoProps) {
                         id='isPEP'
                         label='Dichiaro di essere una PEP'
                         name='isPEP'
+                        icon={infoIcon}
                         register={register}
                         inputProps={{
                             "aria-checked": isPEP,
@@ -141,7 +137,6 @@ function FormStepTwo({ onSubmit, defaultValues }: FormStepTwoProps) {
                         }}
                         className='mb-4'
                     />
-                    {/* <Switcher2 /> */}
                 </div>
             </Wrapper>
 
