@@ -87,7 +87,7 @@ npm install # or yarn install
 - Tests in /**tests**/ covering:
   - Input validation errors
   - Zod schemas (invalid/valid inputs)
-  - Redux slice reducers and action creators
+  - Redux slice reducers
 
 Run:
 
