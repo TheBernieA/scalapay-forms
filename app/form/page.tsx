@@ -24,11 +24,17 @@ function MultiStepFormPage() {
         dispatch(goToStep(2))
     };
 
-    // useEffect(() => {
-    //     return () => {
-    //         dispatch(resetForm())
-    //     }
-    // }, [pathName, dispatch])
+    useEffect(() => {
+        if (pathName === '/') {
+            dispatch(resetForm())
+        }
+    }, [pathName, dispatch])
+
+    useEffect(() => {
+        return () => {
+            dispatch(resetForm())
+        }
+    }, [pathName, dispatch])
 
     const handleStep2Submit = async (data: any) => {
         dispatch(updateFormData(data));
@@ -49,7 +55,6 @@ function MultiStepFormPage() {
             }
             toast.success('Dati inviati con successo!')
             router.push('/')
-            dispatch(resetForm())
         } catch (err: any) {
             console.error('Submit failed:', err);
             toast.error(`Errore durante l'invio dei dati: ${err.message || 'Si è verificato un errore'

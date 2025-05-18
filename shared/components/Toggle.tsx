@@ -30,11 +30,6 @@ const Toggle = ({ id,
                     id={id}
                     type="checkbox"
                     className='sr-only peer'
-                    onKeyDown={(e: any) => {
-                        if (e.key === 'Enter') {
-                            e.preventDefault()
-                        }
-                    }}
                     {...register(name)}
                     role="switch"
                     {...inputProps}
