@@ -115,28 +115,30 @@ function FormStepTwo({ onSubmit, defaultValues }: FormStepTwoProps) {
                     />
                     <input type="hidden" {...register("country")} />
 
-                    <Toggle
-                        id='currentlyLiveHere'
-                        label='I currently live here'
-                        name='currentlyLiveHere'
-                        register={register}
-                        inputProps={{
-                            "aria-checked": currentlyLiveHere,
-                            "aria-label": "I currently live here"
-                        }}
-                    />
-                    <Toggle
-                        id='isPEP'
-                        label='Dichiaro di essere una PEP'
-                        name='isPEP'
-                        icon={infoIcon}
-                        register={register}
-                        inputProps={{
-                            "aria-checked": isPEP,
-                            "aria-label": "Dichiaro di essere una PEP"
-                        }}
-                        className='mb-4'
-                    />
+                    <div className="">
+                        <Toggle
+                            id='currentlyLiveHere'
+                            label='I currently live here'
+                            name='currentlyLiveHere'
+                            register={register}
+                            inputProps={{
+                                "aria-checked": currentlyLiveHere,
+                                "aria-label": "I currently live here"
+                            }}
+                        />
+                        <Toggle
+                            id='isPEP'
+                            label='Dichiaro di essere una PEP'
+                            name='isPEP'
+                            icon={infoIcon}
+                            register={register}
+                            inputProps={{
+                                "aria-checked": isPEP,
+                                "aria-label": "Dichiaro di essere una PEP"
+                            }}
+                            className='mb-4 border-t border-[#EFF1F5]'
+                        />
+                    </div>
                 </div>
             </Wrapper>
 

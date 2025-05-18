@@ -66,6 +66,13 @@
 .switch input:checked + .slider {
   background-color: #ccccff;
 }
+.switch input:focus + .slider.round {
+  border: 1px solid #272727;
+}
+.switch input:focus + .slider {
+  background-color: #ccccff;
+  border: 1px solid #ccccff;
+}
 
 .switch input:checked + .slider::before {
   transform: translateX(14px) translateY(-50%);

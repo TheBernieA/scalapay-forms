@@ -35,14 +35,7 @@ const Toggle = ({ id,
                     role="switch"
                     {...inputProps}
                 />
-                <span className={`
-                    slider round
-                    /* focus ring when keyboard focusing the input */
-                    peer-focus-visible:outline-none
-                    peer-focus-visible:ring-2
-                    peer-focus-visible:ring-offset-2
-                    peer-focus-visible:ring-green-500 
-                    `}></span>
+                <span className={`slider round`}></span>
             </label>
         </>
     )
