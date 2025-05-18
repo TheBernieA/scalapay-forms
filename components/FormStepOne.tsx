@@ -2,11 +2,13 @@
 
 import { step1Schema } from '@/schema/formSchema';
 import Button from '@/shared/components/Button';
+import DatePickerCmp from '@/shared/components/DatePicker';
 import FormHeader from '@/shared/components/FormHeader';
 import InputField from '@/shared/components/InputField';
 import Wrapper from '@/shared/components/Wrapper';
 import { validateFiscalCode } from '@/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { format } from 'date-fns';
 import { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import { useForm } from 'react-hook-form';
@@ -18,8 +20,7 @@ interface FormStepOneProps {
 }
 
 function FormStepOne({ onNext, defaultValues }: FormStepOneProps) {
-    const [dateOfBirth, setDateOfBirth] = useState();
-    const { register, handleSubmit, setError, formState: { errors, isSubmitting, isValid } } = useForm({
+    const { register, handleSubmit, setError, control, formState: { errors, isSubmitting, isValid } } = useForm({
         resolver: zodResolver(step1Schema),
         defaultValues,
         mode: 'onChange',
@@ -32,7 +33,13 @@ function FormStepOne({ onNext, defaultValues }: FormStepOneProps) {
             setError('fiscalCode', { type: 'manual', message: 'Codice fiscale non valido' });
             return;
         }
-        onNext(data);
+
+        const formattedData = {
+            ...data,
+            dateOfBirth: format(data.dateOfBirth, 'dd/MM/yyyy')
+        }
+
+        onNext(formattedData);
     };
 
     return (
@@ -75,20 +82,7 @@ function FormStepOne({ onNext, defaultValues }: FormStepOneProps) {
                             "aria-label": "Last Name"
                         }}
                     />
-                    <InputField
-                        id='dateOfBirth'
-                        name='dateOfBirth'
-                        type='date'
-                        register={register}
-                        placeholder='Data di nascita (DD/MM/YYYY)'
-                        error={errors?.dateOfBirth}
-                        inputProps={{
-                            "aria-labelledby": "dateOfBirth",
-                            "aria-label": "Date Of Birth",
-                            min: '1900-01-01',
-                            max: '9999-12-31',
-                        }}
-                    />
+                    <DatePickerCmp control={control} error={errors?.dateOfBirth} />
                     <InputField
                         id='fiscalCode'
                         name='fiscalCode'
@@ -100,12 +94,7 @@ function FormStepOne({ onNext, defaultValues }: FormStepOneProps) {
                             "aria-label": "Fiscal Code"
                         }}
                     />
-                    <DatePicker
-                        dateFormat='dd/MM/yyyy'
-                        selected={dateOfBirth}
-                        onChange={(date: any) => { setDateOfBirth(date) }}
-                        placeholderText='Data di Nascita (DD/MM/YYYY)'
-                    />
+
                 </div>
             </Wrapper>
             <Button

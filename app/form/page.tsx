@@ -59,7 +59,7 @@ function MultiStepFormPage() {
     return (
         <div className='flex flex-col w-full h-full bg-[#F6F7FB] pb-[30px] relative'>
             <Header />
-            <div className="flex-1 px-4 -mt-[110px] z-10">
+            <div className="flex-1 px-4 -mt-[110px] z-30">
                 {step === 1 && <FormStepOne onNext={handleStep1Submit} defaultValues={formData} />}
                 {step === 2 && <FormStepTwo onSubmit={handleStep2Submit} defaultValues={formData} />}
             </div>

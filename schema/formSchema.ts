@@ -11,10 +11,14 @@ export const step1Schema = z.object({
     .string()
     .min(2, "Lastname should have at least 2 character")
     .regex(/^[A-Za-zÀ-ÿ\s]+$/, "Only alphabets are accepted"),
-  dateOfBirth: z.string().refine((date) => {
-    const parsed = parseISO(date);
-    return isValid(parsed) && differenceInYears(new Date(), parsed) >= 18;
-  }, "You must be at least 18 years"),
+  dateOfBirth: z
+    .date({
+      required_error: "Date of birth is required",
+      invalid_type_error: "Invalid date format",
+    })
+    .refine((date) => {
+      return isValid(date) && differenceInYears(new Date(), date) >= 18;
+    }, "You must be at least 18 years"),
   fiscalCode: z.string().min(1, "Fiscal code is required"),
 });
 
