@@ -17,7 +17,7 @@ interface FormStepTwoProps {
 }
 
 function FormStepTwo({ onSubmit, defaultValues }: FormStepTwoProps) {
-    const { register, watch, handleSubmit, setValue, formState: { errors, isSubmitting } } = useForm({
+    const { register, watch, handleSubmit, setValue, formState: { errors, isValid, isSubmitting } } = useForm({
         resolver: zodResolver(step2Schema),
         defaultValues,
         mode: 'onChange',
@@ -153,12 +153,12 @@ function FormStepTwo({ onSubmit, defaultValues }: FormStepTwoProps) {
                 label='Salva'
                 role='button'
                 type='submit'
-                disabled={isSubmitting}
+                disabled={!isValid || isSubmitting}
                 className={`w-[244px] h-[45px] 
                     rounded-[100px] text-white text-[14px] 
                     leading-[150%] tracking-[0%] 
                     font-semibold px-4 mx-auto mt-auto
-                     ${isSubmitting ? 'bg-[#8893f1]' : 'bg-[#5666F0]'}`}
+                     ${(isSubmitting || !isValid) ? 'bg-button-secondary' : 'bg-button-primary'}`}
             />
 
         </form>
