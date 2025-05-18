@@ -9,6 +9,7 @@ interface InputProps {
     register?: any;
     error?: any;
     flexDirection?: string;
+    testId?: string;
     className?: string;
     disabled?: boolean;
     inputProps?: React.InputHTMLAttributes<HTMLInputElement>;
@@ -23,6 +24,7 @@ const InputField = ({
     error,
     flexDirection = "flex-col",
     register,
+    testId,
     className = "",
     disabled,
     inputProps
@@ -40,6 +42,7 @@ const InputField = ({
             <input
                 id={id}
                 type={type}
+                data-testid={testId}
                 {...register?.(name)}
                 {...inputProps}
                 placeholder={placeholder}
@@ -48,7 +51,7 @@ const InputField = ({
                     w-full
                     h-[56px]
                     border 
-                    rounded-[8px]
+                    rounded-[10px]
                     px-[14px]
                     text-sm
                     placeholder:font-medium

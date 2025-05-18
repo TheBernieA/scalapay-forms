@@ -5,11 +5,12 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 
 interface DatePickerProps {
+    testId?: string;
     control: any;
     error: any
 }
 
-const DatePickerCmp = ({ control, error }: DatePickerProps) => {
+const DatePickerCmp = ({ control, error, testId }: DatePickerProps) => {
     return (
         <div>
             <Controller
@@ -47,6 +48,7 @@ const DatePickerCmp = ({ control, error }: DatePickerProps) => {
                             outline-none"
                             customInput={
                                 <input
+                                    data-testid={testId}
                                     maxLength={10}
                                     pattern="\d{2}/\d{2}/\d{4}"
                                 />

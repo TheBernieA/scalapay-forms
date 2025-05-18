@@ -9,8 +9,6 @@ import Wrapper from '@/shared/components/Wrapper';
 import { validateFiscalCode } from '@/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { format } from 'date-fns';
-import { useState } from 'react';
-import DatePicker from 'react-datepicker';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
@@ -51,6 +49,7 @@ function FormStepOne({ onNext, defaultValues }: FormStepOneProps) {
                     <InputField
                         id='email'
                         name='email'
+                        testId='email-input'
                         register={register}
                         placeholder='Email'
                         error={errors?.email}
@@ -63,6 +62,7 @@ function FormStepOne({ onNext, defaultValues }: FormStepOneProps) {
                     <InputField
                         id='firstName'
                         name='firstName'
+                        testId='firstName-input'
                         register={register}
                         placeholder='Nome'
                         error={errors?.firstName}
@@ -74,6 +74,7 @@ function FormStepOne({ onNext, defaultValues }: FormStepOneProps) {
                     <InputField
                         id='lastName'
                         name='lastName'
+                        testId='lastName-input'
                         register={register}
                         placeholder='Cognome'
                         error={errors?.lastName}
@@ -82,10 +83,11 @@ function FormStepOne({ onNext, defaultValues }: FormStepOneProps) {
                             "aria-label": "Last Name"
                         }}
                     />
-                    <DatePickerCmp control={control} error={errors?.dateOfBirth} />
+                    <DatePickerCmp testId='dateOfBirth-input' control={control} error={errors?.dateOfBirth} />
                     <InputField
                         id='fiscalCode'
                         name='fiscalCode'
+                        testId='fiscalCode-input'
                         register={register}
                         placeholder='Codice Fiscale'
                         error={errors?.fiscalCode}

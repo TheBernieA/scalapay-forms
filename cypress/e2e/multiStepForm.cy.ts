@@ -6,7 +6,7 @@ describe("Multi-Step Form E2E", () => {
     cy.get('input[name="email"]').type("test@example.com");
     cy.get('input[name="firstName"]').type("Mario");
     cy.get('input[name="lastName"]').type("Rossi");
-    cy.get('input[name="dateOfBirth"]').type("2001-01-01");
+    cy.get('input[data-testid="dateOfBirth-input"]').type("01/01/2001");
     cy.get('input[name="fiscalCode"]').type("ABCDEF85S14F112Y");
 
     cy.get('form[role="form"]').submit();
@@ -18,7 +18,9 @@ describe("Multi-Step Form E2E", () => {
     cy.get('input[name="province"]').type("RM");
     cy.get('input[name="city"]').type("Roma");
 
-    cy.get('select[name="country"]').select("IT");
+    cy.get('input[data-testid="country-input"]').type("Italy").click();
+    cy.get('[data-testId="country-dropdown-list"]').should("be.visible");
+    cy.get('[data-testId="country-dropdown-list"]').contains("Italy").click();
 
     cy.get('input[name="currentlyLiveHere"]');
     cy.get('input[name="isPEP"]').check({ force: true });
@@ -30,12 +32,5 @@ describe("Multi-Step Form E2E", () => {
       statusCode: 200,
       body: {},
     });
-
-    // Check success behavior
-    // cy.on("window:alert", (txt) => {
-    //   expect(txt).to.contains("Dati inviati con successo");
-    // });
-
-    // cy.url().should("include", "/form-success");
   });
 });

@@ -12,17 +12,17 @@ describe("FormStepOne Component", () => {
   it("renders all input fields correctly", () => {
     render(<FormStepOne onNext={jest.fn()} defaultValues={{}} />);
 
-    expect(screen.getByLabelText("Email")).toBeInTheDocument();
-    expect(screen.getByLabelText("First Name")).toBeInTheDocument();
-    expect(screen.getByLabelText("Last Name")).toBeInTheDocument();
-    expect(screen.getByLabelText("Date Of Birth")).toBeInTheDocument();
-    expect(screen.getByLabelText("Fiscal Code")).toBeInTheDocument();
+    expect(screen.getByTestId("email-input")).toBeInTheDocument();
+    expect(screen.getByTestId("firstName-input")).toBeInTheDocument();
+    expect(screen.getByTestId("lastName-input")).toBeInTheDocument();
+    expect(screen.getByTestId("dateOfBirth-input")).toBeInTheDocument();
+    expect(screen.getByTestId("fiscalCode-input")).toBeInTheDocument();
   });
 
   it("allows user input in the fields", () => {
     render(<FormStepOne onNext={jest.fn()} defaultValues={{}} />);
 
-    const emailInput = screen.getByLabelText("Email");
+    const emailInput = screen.getByTestId("email-input");
     fireEvent.change(emailInput, { target: { value: "test@example.com" } });
     expect(emailInput).toHaveValue("test@example.com");
   });
@@ -33,7 +33,7 @@ describe("FormStepOne Component", () => {
 
   it("disables submit button when submitting", () => {
     render(<FormStepOne onNext={jest.fn()} defaultValues={{}} />);
-    const submitButton = screen.getByText("Prossimo");
+    const submitButton = screen.getByText("Continua");
     expect(submitButton).toBeDisabled();
   });
 
@@ -42,13 +42,13 @@ describe("FormStepOne Component", () => {
     const mockOnNext = jest.fn();
     render(<FormStepOne onNext={mockOnNext} defaultValues={{}} />);
 
-    await userEvent.type(screen.getByLabelText('Email'), 'test@example.com');
-    await userEvent.type(screen.getByLabelText('First Name'), 'John');
-    await userEvent.type(screen.getByLabelText('Last Name'), 'Doe');
-    await userEvent.type(screen.getByLabelText('Date Of Birth'), '2001-01-01');
-    await userEvent.type(screen.getByLabelText('Fiscal Code'), 'ABCDEF85S14F112Y');
+    await userEvent.type(screen.getByTestId('email-input'), 'test@example.com');
+    await userEvent.type(screen.getByTestId('firstName-input'), 'John');
+    await userEvent.type(screen.getByTestId('lastName-input'), 'Doe');
+    await userEvent.type(screen.getByTestId('dateOfBirth-input'), '01/01/2001');
+    await userEvent.type(screen.getByTestId('fiscalCode-input'), 'ABCDEF85S14F112Y');
 
-    const nextButton = screen.getByRole('button', { name: /Next/i })
+    const nextButton = screen.getByRole('button', { name: /Continua/i })
     expect(nextButton).not.toBeDisabled
 
     await userEvent.click(nextButton)

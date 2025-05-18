@@ -44,6 +44,7 @@ function FormStepTwo({ onSubmit, defaultValues }: FormStepTwoProps) {
                         <InputField
                             id='street'
                             name='street'
+                            testId='street-input'
                             register={register}
                             placeholder='Via, piazza, etc'
                             error={errors?.street}
@@ -57,6 +58,7 @@ function FormStepTwo({ onSubmit, defaultValues }: FormStepTwoProps) {
                             id='number'
                             name='number'
                             type='number'
+                            testId='number-input'
                             register={register}
                             placeholder='N°'
                             error={errors?.number}
@@ -72,6 +74,7 @@ function FormStepTwo({ onSubmit, defaultValues }: FormStepTwoProps) {
                         <InputField
                             id='postalCode'
                             name='postalCode'
+                            testId='postalCode-input'
                             register={register}
                             placeholder='CAP'
                             error={errors?.postalCode}
@@ -85,6 +88,7 @@ function FormStepTwo({ onSubmit, defaultValues }: FormStepTwoProps) {
                         <InputField
                             id='province'
                             name='province'
+                            testId='province-input'
                             register={register}
                             placeholder='Provincia'
                             error={errors?.province}
@@ -98,6 +102,7 @@ function FormStepTwo({ onSubmit, defaultValues }: FormStepTwoProps) {
                     <InputField
                         id='city'
                         name='city'
+                        testId='city-input'
                         register={register}
                         placeholder='Città'
                         error={errors?.city}
@@ -109,6 +114,8 @@ function FormStepTwo({ onSubmit, defaultValues }: FormStepTwoProps) {
                     <DropdownInput
                         id='country'
                         placeholder='Nazione'
+                        testId='country-input'
+                        dropdownTestId='country-dropdown-list'
                         data={countries}
                         onSelect={handleCountrySelect}
                         error={errors?.country}

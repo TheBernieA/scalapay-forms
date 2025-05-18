@@ -1,18 +1,19 @@
 "use client"
 
-import { count } from 'console';
-import React, { useState } from 'react'
+import { useState } from 'react';
 
 interface DropdownProps {
     id: string;
     placeholder: string;
     label?: string;
+    testId?: string;
+    dropdownTestId?: string;
     data: any;
     inputProps?: any;
     error?: any;
     onSelect: (date: any) => void;
 }
-const DropdownInput = ({ id, onSelect, label, data, error, inputProps, placeholder }: DropdownProps) => {
+const DropdownInput = ({ id, onSelect, testId, dropdownTestId, label, data, error, inputProps, placeholder }: DropdownProps) => {
     const [query, setQuery] = useState('')
     const [filtered, setFiltered] = useState([])
     const [showDropdown, setShowDropdown] = useState(false)
@@ -38,6 +39,7 @@ const DropdownInput = ({ id, onSelect, label, data, error, inputProps, placehold
                 type="text"
                 value={query}
                 {...inputProps}
+                data-testid={testId}
                 onChange={handleChange}
                 onFocus={() => setShowDropdown(true)}
                 onBlur={() => setTimeout(() => setShowDropdown(false), 100)}
@@ -64,7 +66,7 @@ const DropdownInput = ({ id, onSelect, label, data, error, inputProps, placehold
                     `}
             />
             {showDropdown && filtered.length > 0 && (
-                <ul className="absolute z-50 bg-white border border-gray-200 w-full rounded-md mt-1 shadow-md max-h-40 overflow-y-auto">
+                <ul data-testid={dropdownTestId} className="absolute z-50 bg-white border border-gray-200 w-full rounded-md mt-1 shadow-md max-h-40 overflow-y-auto">
                     {filtered.map((item: any) => (
                         <li
                             key={item.code}
