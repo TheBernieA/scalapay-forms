@@ -1,8 +1,8 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono, Poppins } from "next/font/google";
-import "./globals.css";
 import ReduxProvider from "@/store/provider/ReduxProvider";
+import type { Metadata } from "next";
+import { Poppins } from "next/font/google";
 import { ToastContainer } from "react-toastify";
+import "./globals.css";
 
 
 const poppins = Poppins({
