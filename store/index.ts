@@ -34,6 +34,7 @@ export const store = configureStore({
         // whose payloads may include non-serializable data.
         // We list them here so the serializability middleware skips them
         // and doesn’t log false errors when hydrating or persisting state. :contentReference[oaicite:1]{index=1}
+        //https://redux-toolkit.js.org/usage/usage-guide
         ignoredActions: [
           FLUSH, // flush queued state to storage
           REHYDRATE, // restore state from storage
