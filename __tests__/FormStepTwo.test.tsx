@@ -1,6 +1,6 @@
 import FormStepTwo from "@/components/FormStepTwo"
 import { renderWithProvider } from "@/utils/test-helpers"
-import { screen, waitFor } from "@testing-library/react"
+import { screen, waitFor, within } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 
 
@@ -35,6 +35,8 @@ describe('FormStepTwo Component', () => {
         await userEvent.type(screen.getByTestId('province-input'), 'RM')
         await userEvent.type(screen.getByTestId('country-input'),
             'Italy')
+        const dropdown = await screen.findByTestId('country-dropdown-list');
+        await userEvent.click(within(dropdown).getByText('Italy'));
         await userEvent.click(screen.getByRole('switch', { name: /I currently live here/i }))
         await userEvent.click(screen.getByRole('switch', { name: /Dichiaro di essere una PEP/i }))
 

@@ -27,10 +27,6 @@ describe("FormStepOne Component", () => {
     expect(emailInput).toHaveValue("test@example.com");
   });
 
-  // it("Fiscal Code input only accepts ABCDEF85S14F112Y", async () => {
-
-  // })
-
   it("disables submit button when submitting", () => {
     render(<FormStepOne onNext={jest.fn()} defaultValues={{}} />);
     const submitButton = screen.getByText("Continua");
