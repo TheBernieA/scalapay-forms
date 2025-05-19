@@ -83,7 +83,12 @@ function FormStepOne({ onNext, defaultValues }: FormStepOneProps) {
                             "aria-label": "Last Name"
                         }}
                     />
-                    <DatePickerCmp testId='dateOfBirth-input' control={control} error={errors?.dateOfBirth} />
+                    <DatePickerCmp
+                        testId='dateOfBirth-input'
+                        control={control}
+                        error={errors?.dateOfBirth}
+                    />
+
                     <InputField
                         id='fiscalCode'
                         name='fiscalCode'

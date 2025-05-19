@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import React from 'react';
+import '@/styles/toggle.css'
 
 interface ToggleProps {
     id?: string;

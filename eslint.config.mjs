@@ -16,3 +16,13 @@ const eslintConfig = [
 ];
 
 export default eslintConfig;
+
+
+// {
+//   "root": true,
+//   "extends": ["next/core-web-vitals", "next/typescript"],
+//   "rules": {
+//     "react/no-unescaped-entities": "off",
+//     "no-console": "warn"
+//   }
+// }
