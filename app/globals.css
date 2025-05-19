@@ -15,7 +15,7 @@
   --color-border-primary: #e5e5e5;
   --color-button-primary: #5666f0;
   --color-button-secondary: #8893f1;
-  --color-pink-bg:#F9DCDE;
+  --color-pink-bg: #f9dcde;
 }
 
 .switch {
@@ -55,9 +55,9 @@
   transform: translateY(-50%);
   border-radius: 50%;
   transition: transform 0.3s;
-  box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px,
-    rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px,
-    rgba(0, 0, 0, 0.09) 0px 32px 16px;
+  box-shadow: 0px 1px 3px 0px #00000033;
+  box-shadow: 0px 2px 1px 0px #0000001f;
+  box-shadow: 0px 1px 1px 0px #00000024;
 }
 
 .switch input:checked + .slider::before {
