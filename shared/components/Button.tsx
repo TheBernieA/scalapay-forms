@@ -6,7 +6,8 @@ interface ButtonProps {
     type?: "button" | "submit" | "reset";
     buttonProps?: any;
     disabled?: boolean;
-    role: string
+    role: string;
+    loadingSpinner?: boolean
 }
 
 const Button = ({
@@ -15,18 +16,24 @@ const Button = ({
     type = "button",
     buttonProps,
     disabled,
+    loadingSpinner,
     role
 }: ButtonProps) => {
     return (
-        <button
-            type={type}
-            role={role}
-            className={`capitalize cursor-pointer ${className}`}
-            disabled={disabled}
-            {...buttonProps}
-        >
-            {label}
-        </button>
+        <div className={`relative flex items-center justify-center overflow-hidden ${className}`}>
+            <button
+                type={type}
+                role={role}
+                className={`capitalize cursor-pointer`}
+                disabled={disabled}
+                {...buttonProps}
+            >
+                {label}
+            </button>
+            {loadingSpinner && <div className="absolute top-0 right-0 inset-0 bg-black/50 flex items-center justify-center z-50">
+                <div className="animate-spin rounded-full size-8 border-b-2 border-white"></div>
+            </div>}
+        </div>
     );
 };
 
