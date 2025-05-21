@@ -7,16 +7,16 @@ const compat = new FlatCompat({
 
 const eslintConfig = [
   ...compat.config({
-    extends: ["next", "prettier"],
+    extends: ["next", "prettier", "next/core-web-vitals"],
     rules: {
       "react/no-unescaped-entities": "off",
       "@next/next/no-page-custom-font": "off",
+      "no-console": "warn",
     },
   }),
 ];
 
 export default eslintConfig;
-
 
 // {
 //   "root": true,

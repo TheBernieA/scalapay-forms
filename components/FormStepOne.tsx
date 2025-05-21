@@ -18,7 +18,7 @@ interface FormStepOneProps {
 }
 
 function FormStepOne({ onNext, defaultValues }: FormStepOneProps) {
-    const { register, handleSubmit, setError, control, formState: { errors, isSubmitting, isValid } } = useForm({
+    const { register, handleSubmit, setValue, setError, control, formState: { errors, isSubmitting, isValid } } = useForm({
         resolver: zodResolver(step1Schema),
         defaultValues,
         mode: 'onChange',
@@ -97,6 +97,11 @@ function FormStepOne({ onNext, defaultValues }: FormStepOneProps) {
                         placeholder='Codice Fiscale'
                         error={errors?.fiscalCode}
                         inputProps={{
+                            onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
+                                const toUpperCase = e.target.value.toUpperCase()
+                                setValue('fiscalCode', toUpperCase, { shouldValidate: true, shouldDirty: true })
+                            },
+                            maxLength: 16,
                             "aria-labelledby": "fiscalCode",
                             "aria-label": "Fiscal Code"
                         }}
