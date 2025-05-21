@@ -97,6 +97,7 @@ function FormStepOne({ onNext, defaultValues }: FormStepOneProps) {
                         placeholder='Codice Fiscale'
                         error={errors?.fiscalCode}
                         inputProps={{
+                            maxLength: 16,
                             "aria-labelledby": "fiscalCode",
                             "aria-label": "Fiscal Code"
                         }}
