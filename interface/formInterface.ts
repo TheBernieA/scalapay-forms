@@ -25,7 +25,9 @@ export interface Step2Values {
   postalCode: string;
   province: string;
   city: string;
-  country: any;
+  country: string;
   currentlyLiveHere?: boolean;
   isPEP?: boolean;
 }
+
+export interface FormValues extends Step1Values, Step2Values {}

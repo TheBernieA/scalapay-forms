@@ -1,6 +1,7 @@
 'use client';
 
 import Header from '@/components/Header';
+import { Step1Values } from '@/interface/formInterface';
 import { AppDispatch, RootState } from '@/store';
 import { goToStep, resetForm, updateFormData } from '@/store/formSlice';
 import dynamic from 'next/dynamic';
@@ -19,7 +20,7 @@ function MultiStepFormPage() {
     const step = useSelector((state: RootState) => state.form.step)
     const formData = useSelector((state: RootState) => state.form.data)
 
-    const handleStep1Submit = (data: any) => {
+    const handleStep1Submit = (data: Step1Values) => {
         dispatch(updateFormData(data))
         dispatch(goToStep(2))
     };

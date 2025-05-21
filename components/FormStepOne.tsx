@@ -1,5 +1,6 @@
 'use client'
 
+import { Step1Values } from '@/interface/formInterface';
 import { step1Schema } from '@/schema/formSchema';
 import Button from '@/shared/components/Button';
 import DatePickerCmp from '@/shared/components/DatePicker';
@@ -13,7 +14,7 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
 interface FormStepOneProps {
-    onNext: (data: any) => void,
+    onNext: (data: Step1Values) => void,
     defaultValues?: any
 }
 
