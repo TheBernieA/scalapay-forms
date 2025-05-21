@@ -113,13 +113,13 @@ function FormStepOne({ onNext, defaultValues }: FormStepOneProps) {
                 label='Continua'
                 type="submit"
                 role='button'
+                loadingSpinner={isSubmitting}
                 disabled={!isValid || isSubmitting}
                 className={`w-[244px] h-[45px] 
                     rounded-[100px] text-white text-[14px] 
                     leading-[150%] tracking-[0%] font-semibold 
                     px-4 mx-auto mt-auto
-                    ${!isValid || isSubmitting ? 'bg-button-secondary' : 'bg-button-primary'}
-                    `}
+                    ${!isValid || isSubmitting ? 'bg-button-secondary' : 'bg-button-primary'}`}
             />
         </form>
     );
