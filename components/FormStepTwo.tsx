@@ -37,7 +37,7 @@ function FormStepTwo({ onSubmit, defaultValues }: FormStepTwoProps) {
             <Wrapper className='p-4'>
                 <div className="flex gap-[5px] items-center mb-3">
                     <h2 className='text-text-primary font-semibold text-[15px] leading-[160%] tracking-[0%] '>Indirizzo di residenza</h2>
-                    <Image src={faqIcon} alt='faq-icon' className='size-[18.2px]' />
+                    <Image src={faqIcon} alt='faq-icon' className='size-6' />
                 </div>
                 <div className='flex flex-col gap-4 mt-2'>
                     <div className="grid grid-cols-3 gap-4 items-start">
