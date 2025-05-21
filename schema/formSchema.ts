@@ -35,3 +35,5 @@ export const step2Schema = z.object({
   currentlyLiveHere: z.boolean().optional(),
   isPEP: z.boolean().optional(),
 });
+
+export const completeFormScherma = step1Schema.merge(step2Schema);
