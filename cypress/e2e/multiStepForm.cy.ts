@@ -28,7 +28,7 @@ describe("Multi-Step Form E2E", () => {
     cy.get('button[type="submit"]').click();
 
     // MOCKINNG POST REQ. TO AVOID ACTUAL NETWORK CALLS
-    cy.intercept("POST", "/submit", {
+    cy.intercept("POST", "/api/submit", {
       statusCode: 200,
       body: {},
     });

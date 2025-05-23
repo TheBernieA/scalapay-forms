@@ -24,7 +24,7 @@ const Button = ({
             <button
                 type={type}
                 role={role}
-                className={`capitalize cursor-pointer`}
+                className={`capitalize cursor-pointer w-full h-full px-4`}
                 disabled={disabled}
                 {...buttonProps}
             >
