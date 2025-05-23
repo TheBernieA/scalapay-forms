@@ -2,13 +2,18 @@ import { differenceInYears, isValid } from "date-fns";
 import { z } from "zod";
 
 export const step1Schema = z.object({
-  email: z.string().email("Email is not valid, please enter a valid email"),
+  email: z
+    .string()
+    .nonempty("Email is required")
+    .email("Email is not valid, please enter a valid email"),
   firstName: z
     .string()
+    .nonempty("Firstname is required")
     .min(2, "Firstname should have at least 2 characters")
     .regex(/^[A-Za-zÀ-ÿ\s]+$/, "Only alphabets are accepted"),
   lastName: z
     .string()
+    .nonempty("Lastname is required")
     .min(2, "Lastname should have at least 2 character")
     .regex(/^[A-Za-zÀ-ÿ\s]+$/, "Only alphabets are accepted"),
   dateOfBirth: z
@@ -25,11 +30,16 @@ export const step1Schema = z.object({
 export const step2Schema = z.object({
   street: z
     .string()
+    .nonempty("Street is required")
     .min(5, "address must be at least 5 characters")
     .regex(/^[A-Za-zÀ-ÿ\s]+$/, "Invalid input, only letters are allowed"),
-  number: z.string().regex(/^\d+$/, "Only numerical inputs are accepted"),
+  number: z
+    .string()
+    .nonempty("Number is required")
+    .regex(/^\d+$/, "Only numerical inputs are accepted"),
   postalCode: z
     .string()
+    .nonempty("Postal code is required")
     .min(5, "CAP is not valid")
     .max(5)
     .regex(/^\d+$/, "Invalid CAP input, only numerical inputs are accepted"),
