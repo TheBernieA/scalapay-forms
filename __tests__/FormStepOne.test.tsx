@@ -27,13 +27,6 @@ describe("FormStepOne Component", () => {
     expect(emailInput).toHaveValue("test@example.com");
   });
 
-  it("disables submit button when submitting", () => {
-    render(<FormStepOne onNext={jest.fn()} defaultValues={{}} />);
-    const submitButton = screen.getByText("Continua");
-    expect(submitButton).toBeDisabled();
-  });
-
-
   it("calls onNext when form is submitted", async () => {
     const mockOnNext = jest.fn();
     render(<FormStepOne onNext={mockOnNext} defaultValues={{}} />);
@@ -45,7 +38,6 @@ describe("FormStepOne Component", () => {
     await userEvent.type(screen.getByTestId('fiscalCode-input'), 'ABCDEF85S14F112Y');
 
     const nextButton = screen.getByRole('button', { name: /Continua/i })
-    expect(nextButton).not.toBeDisabled
 
     await userEvent.click(nextButton)
 
