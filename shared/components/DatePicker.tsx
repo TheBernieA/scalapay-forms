@@ -7,10 +7,11 @@ import 'react-datepicker/dist/react-datepicker.css';
 interface DatePickerProps {
     testId?: string;
     control: any;
+    inputProps?: any;
     error: any
 }
 
-const DatePickerCmp = ({ control, error, testId }: DatePickerProps) => {
+const DatePickerCmp = ({ control, error, inputProps, testId }: DatePickerProps) => {
     return (
         <div>
             <Controller
@@ -24,6 +25,11 @@ const DatePickerCmp = ({ control, error, testId }: DatePickerProps) => {
                             onChange={(date) => field.onChange(date)}
                             placeholderText="Data di Nascita (DD/MM/YYYY)"
                             maxDate={new Date()}
+                            onKeyDown={(e: React.KeyboardEvent<HTMLElement>) => {
+                                if (e.key === ' ') {
+                                    e.preventDefault()
+                                }
+                            }}
                             showYearDropdown
                             scrollableYearDropdown
                             yearDropdownItemNumber={100}
@@ -51,6 +57,7 @@ const DatePickerCmp = ({ control, error, testId }: DatePickerProps) => {
                                     data-testid={testId}
                                     maxLength={10}
                                     pattern="\d{2}/\d{2}/\d{4}"
+                                    {...inputProps}
                                 />
                             }
                         />

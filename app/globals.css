@@ -1,15 +1,11 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 * {
   font-family: var(--font-poppins);
 }
 
 @theme {
+  --color-background-light: #f6f7fb;
   --color-text-primary: #272727;
   --color-text-secondary: #61666a;
   --color-border-primary: #e5e5e5;
@@ -17,4 +13,3 @@
   --color-button-secondary: #8893f1;
   --color-pink-bg: #f9dcde;
 }
-
