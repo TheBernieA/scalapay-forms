@@ -10,7 +10,7 @@ import Wrapper from '@/shared/components/Wrapper';
 import { Step2FormValues } from '@/types/forms-types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Image from 'next/image';
-import { ChangeEvent } from 'react';
+import React, { ChangeEvent } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 interface FormStepTwoProps {
@@ -85,6 +85,11 @@ function FormStepTwo({ onSubmit, defaultValues }: FormStepTwoProps) {
                             placeholder='CAP'
                             error={errors?.postalCode}
                             inputProps={{
+                                onKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => {
+                                    if (e.key === ' ') {
+                                        e.preventDefault()
+                                    }
+                                },
                                 maxLength: 5,
                                 "aria-labelledby": "postalCode",
                                 "aria-label": "Postal Code",
@@ -103,6 +108,11 @@ function FormStepTwo({ onSubmit, defaultValues }: FormStepTwoProps) {
                                 onChange: (e: ChangeEvent<HTMLInputElement>) => {
                                     const toUpperCase = e.target.value.toUpperCase()
                                     setValue('province', toUpperCase, { shouldValidate: true })
+                                },
+                                onKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => {
+                                    if (e.key === ' ') {
+                                        e.preventDefault()
+                                    }
                                 },
                                 maxLength: 2,
                                 "aria-labelledby": "province",

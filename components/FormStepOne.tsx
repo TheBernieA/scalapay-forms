@@ -54,6 +54,11 @@ function FormStepOne({ onNext, defaultValues }: FormStepOneProps) {
                         placeholder='Email'
                         error={errors?.email}
                         inputProps={{
+                            onKeyDown: ((e: React.KeyboardEvent<HTMLInputElement>) => {
+                                if (e.key === ' ' && (e.target as HTMLInputElement).value.length === 0) {
+                                    e.preventDefault()
+                                }
+                            }),
                             "aria-labelledby": "email",
                             "aria-label": "Email",
                             inputMode: "email"
@@ -100,6 +105,11 @@ function FormStepOne({ onNext, defaultValues }: FormStepOneProps) {
                             onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
                                 const toUpperCase = e.target.value.toUpperCase()
                                 setValue('fiscalCode', toUpperCase, { shouldValidate: true, shouldDirty: true })
+                            },
+                            onKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => {
+                                if (e.key === ' ' && (e.target as HTMLInputElement).value.length === 0) {
+                                    e.preventDefault()
+                                }
                             },
                             maxLength: 16,
                             "aria-labelledby": "fiscalCode",

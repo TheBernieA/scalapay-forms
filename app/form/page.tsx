@@ -72,7 +72,7 @@ function MultiStepFormPage() {
         }
     };
     return (
-        <div className='flex flex-col w-full h-full bg-[#F6F7FB] pb-[30px] relative'>
+        <div className='flex flex-col w-full h-full bg-background-light pb-[30px] relative'>
             <Header />
             <div className="flex-1 px-4 z-30">
                 {step === 1 && <FormStepOne onNext={handleStep1Submit} defaultValues={formData as Partial<Step1FormValues>} />}
