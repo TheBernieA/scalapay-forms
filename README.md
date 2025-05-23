@@ -28,13 +28,13 @@ This project is a two-step registration form built with Next.js App Router, Reac
 
 ## Prerequisites
 
-Node.js >= 16.x
-npm >= 8.x or Yarn
+Node.js >= 16.x (Type `node --version or node -v` in your terminal to check your node version)
+npm >= 8.x or Yarn (Type `npm --version or npm -v` in your terminal to check your node version)
 
 # Clone & Install
 
-git clone `https://github.com/your-username/your-form-project.git`
-cd your-form-project
+git clone `https://github.com/TheBernieA/scalapay-forms.git`
+cd scalapay-forms
 npm install # or yarn install
 
 # Installation
@@ -48,22 +48,21 @@ npm install # or yarn install
 - Uses Tailwind CSS for utility-first styling.
 - Responsive form layout adapts to mobile and desktop.
 - Accessible toggles with `role="switch"` and proper aria-attributes.
-- Success page at `/form-success` with SVG icon and Link back to home.
 
 # Validation Logic
 
 - Step 1 (FormStepOne):
 
   - Email format via Zod
-  - First/Last name: min 2 chars, letters & spaces
+  - First/Last name: min 2 chars, letters
   - Date of birth: HTML min/max, Zod refine + date-fns age check ≥ 18
-  - Fiscal code: async validateFiscalCode utility + manual error on failure
+  - Fiscal code: async validateFiscalCode utility error on failure
 
 - Step 2 (FormStepTwo):
   - Street, province, city: non-empty, regex for letters
   - Number: numeric only
-  - Postal code: length 4–10
-  - Country: ISO code enum
+  - Postal code: max length 5
+  - Country: ISO alpha 2
   - Toggles: boolean
 
 # Code Quality

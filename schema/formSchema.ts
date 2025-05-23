@@ -26,11 +26,22 @@ export const step2Schema = z.object({
   street: z
     .string()
     .min(5, "address must be at least 5 characters")
-    .regex(/^[A-Za-zÀ-ÿ\s]+$/, "Invalid input, only alpabets are allowed"),
+    .regex(/^[A-Za-zÀ-ÿ\s]+$/, "Invalid input, only letters are allowed"),
   number: z.string().regex(/^\d+$/, "Only numerical inputs are accepted"),
-  postalCode: z.string().min(4, "CAP is not valid").max(10, "CAP is not valid"),
-  province: z.string().min(1, "Province is required"),
-  city: z.string().min(1, "City is required"),
+  postalCode: z
+    .string()
+    .min(5, "CAP is not valid")
+    .max(5)
+    .regex(/^\d+$/, "Invalid CAP input, only numerical inputs are accepted"),
+  province: z
+    .string()
+    .min(1, "Province is required")
+    .max(2)
+    .regex(/^[A-Za-zÀ-ÿ\s]+$/, "Invalid input, only letters are allowed"),
+  city: z
+    .string()
+    .min(1, "City is required")
+    .regex(/^[A-Za-zÀ-ÿ\s]+$/, "Invalid input, only letters are allowed"),
   country: z.string().min(1, "Please select country from dropdown"),
   currentlyLiveHere: z.boolean().optional(),
   isPEP: z.boolean().optional(),

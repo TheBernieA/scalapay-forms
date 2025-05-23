@@ -61,6 +61,7 @@ const SelectField = ({
                 defaultValue={defaultValue}
                 required={required}
                 disabled={disabled}
+                {...inputProps}
                 className="bg-[#F6F8FD] border border-[#E0E0E0] rounded-[6px] px-[14px] py-3 text-[#333333] text-sm outline-none appearance-none placeholder:capitalize"
             >
                 <option defaultValue="" disabled className="capitalize text-[#898989]">

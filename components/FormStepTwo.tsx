@@ -7,20 +7,26 @@ import FormHeader from '@/shared/components/FormHeader';
 import InputField from '@/shared/components/InputField';
 import Toggle from '@/shared/components/Toggle';
 import Wrapper from '@/shared/components/Wrapper';
+import { Step2FormValues } from '@/types/forms-types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Image from 'next/image';
-import { useForm } from 'react-hook-form';
+import { ChangeEvent } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
 
 interface FormStepTwoProps {
-    onSubmit: (data: any) => void;
-    defaultValues?: any;
+    onSubmit: SubmitHandler<Step2FormValues>;
+    defaultValues?: Partial<Step2FormValues>;
 }
 
 function FormStepTwo({ onSubmit, defaultValues }: FormStepTwoProps) {
-    const { register, watch, handleSubmit, setValue, formState: { errors, isSubmitting } } = useForm({
+    const { register, watch, handleSubmit, setValue, formState: { errors, isValid, isSubmitting } } = useForm({
         resolver: zodResolver(step2Schema),
-        defaultValues,
-        mode: 'onChange',
+        defaultValues: {
+            ...defaultValues,
+            currentlyLiveHere: defaultValues?.currentlyLiveHere ?? false,
+            isPEP: defaultValues?.isPEP ?? false
+        },
+        mode: "onChange",
         reValidateMode: 'onChange'
     });
 
@@ -79,6 +85,7 @@ function FormStepTwo({ onSubmit, defaultValues }: FormStepTwoProps) {
                             placeholder='CAP'
                             error={errors?.postalCode}
                             inputProps={{
+                                maxLength: 5,
                                 "aria-labelledby": "postalCode",
                                 "aria-label": "Postal Code",
                                 inputMode: "numeric"
@@ -93,6 +100,11 @@ function FormStepTwo({ onSubmit, defaultValues }: FormStepTwoProps) {
                             placeholder='Provincia'
                             error={errors?.province}
                             inputProps={{
+                                onChange: (e: ChangeEvent<HTMLInputElement>) => {
+                                    const toUpperCase = e.target.value.toUpperCase()
+                                    setValue('province', toUpperCase, { shouldValidate: true })
+                                },
+                                maxLength: 2,
                                 "aria-labelledby": "province",
                                 "aria-label": "Province"
                             }}
@@ -111,24 +123,27 @@ function FormStepTwo({ onSubmit, defaultValues }: FormStepTwoProps) {
                             "aria-label": "City"
                         }}
                     />
-                    <DropdownInput
-                        id='country'
-                        placeholder='Nazione'
-                        testId='country-input'
-                        dropdownTestId='country-dropdown-list'
-                        data={countries}
-                        onSelect={handleCountrySelect}
-                        error={errors?.country}
-                    />
-                    <input type="hidden" {...register("country")} />
-
+                    <>
+                        <DropdownInput
+                            id='country'
+                            placeholder='Nazione'
+                            testId='country-input'
+                            dropdownTestId='country-dropdown-list'
+                            data={countries}
+                            onSelect={handleCountrySelect}
+                            error={errors?.country}
+                        />
+                        <input type="hidden" {...register("country")} />
+                    </>
                     <div className="">
                         <Toggle
                             id='currentlyLiveHere'
                             label='I currently live here'
                             name='currentlyLiveHere'
                             register={register}
+                            setValue={setValue}
                             inputProps={{
+                                defaultChecked: defaultValues?.currentlyLiveHere ?? false,
                                 "aria-checked": currentlyLiveHere,
                                 "aria-label": "I currently live here"
                             }}
@@ -139,7 +154,9 @@ function FormStepTwo({ onSubmit, defaultValues }: FormStepTwoProps) {
                             name='isPEP'
                             icon={infoIcon}
                             register={register}
+                            setValue={setValue}
                             inputProps={{
+                                defaultChecked: defaultValues?.isPEP ?? false,
                                 "aria-checked": isPEP,
                                 "aria-label": "Dichiaro di essere una PEP"
                             }}
@@ -158,7 +175,7 @@ function FormStepTwo({ onSubmit, defaultValues }: FormStepTwoProps) {
                 className={`w-[244px] h-[45px] 
                     rounded-[100px] text-white text-[14px] 
                     leading-[150%] tracking-[0%] 
-                    font-semibold px-4 mx-auto mt-auto
+                    font-semibold mx-auto mt-auto
                      ${(isSubmitting) ? 'bg-button-secondary' : 'bg-button-primary'}
                      `}
             />

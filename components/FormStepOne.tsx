@@ -1,12 +1,11 @@
-'use client'
-
-import { Step1Values } from '@/interface/formInterface';
+import { IStep1Values } from '@/interface/formInterface';
 import { step1Schema } from '@/schema/formSchema';
 import Button from '@/shared/components/Button';
 import DatePickerCmp from '@/shared/components/DatePicker';
 import FormHeader from '@/shared/components/FormHeader';
 import InputField from '@/shared/components/InputField';
 import Wrapper from '@/shared/components/Wrapper';
+import { Step1FormValues } from '@/types/forms-types';
 import { validateFiscalCode } from '@/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { format } from 'date-fns';
@@ -14,12 +13,12 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
 interface FormStepOneProps {
-    onNext: (data: Step1Values) => void,
-    defaultValues?: any
+    onNext: (data: IStep1Values) => void,
+    defaultValues?: Partial<Step1FormValues>
 }
 
 function FormStepOne({ onNext, defaultValues }: FormStepOneProps) {
-    const { register, handleSubmit, setValue, setError, control, formState: { errors, isSubmitting, isValid } } = useForm({
+    const { register, handleSubmit, setValue, setError, control, formState: { errors, isSubmitting, isValid } } = useForm<Step1FormValues>({
         resolver: zodResolver(step1Schema),
         defaultValues,
         mode: 'onChange',
@@ -33,7 +32,7 @@ function FormStepOne({ onNext, defaultValues }: FormStepOneProps) {
             return;
         }
 
-        const formattedData = {
+        const formattedData: IStep1Values = {
             ...data,
             dateOfBirth: format(data.dateOfBirth, 'dd/MM/yyyy')
         }
@@ -115,12 +114,11 @@ function FormStepOne({ onNext, defaultValues }: FormStepOneProps) {
                 type="submit"
                 role='button'
                 loadingSpinner={isSubmitting}
-                disabled={!isValid || isSubmitting}
+                disabled={isSubmitting}
                 className={`w-[244px] h-[45px] 
                     rounded-[100px] text-white text-[14px] 
-                    leading-[150%] tracking-[0%] font-semibold 
-                    px-4 mx-auto mt-auto
-                    ${!isValid || isSubmitting ? 'bg-button-secondary' : 'bg-button-primary'}`}
+                    leading-[150%] tracking-[0%] font-semibold mx-auto mt-auto
+                    ${isSubmitting ? 'bg-button-secondary' : 'bg-button-primary'}`}
             />
         </form>
     );

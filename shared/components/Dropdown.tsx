@@ -1,56 +1,71 @@
 "use client"
 
-import { useRef, useState } from 'react';
+import React, { ChangeEvent, useRef, useState } from 'react';
+import { FieldError } from 'react-hook-form';
 
-interface DropdownProps {
+interface IData {
+    code: string,
+    name: string
+}
+interface DropdownProps<T> {
     id: string;
     placeholder: string;
     label?: string;
     testId?: string;
     dropdownTestId?: string;
-    data: any;
-    inputProps?: any;
-    error?: any;
-    onSelect: (date: any) => void;
+    data: T[];
+    inputProps?: React.InputHTMLAttributes<HTMLInputElement>;
+    error?: FieldError;
+    onSelect: (date: T) => void;
 }
-const DropdownInput = ({ id, onSelect, testId, dropdownTestId, label, data, error, inputProps, placeholder }: DropdownProps) => {
+
+function DropdownInput<T extends IData>({ id, onSelect, testId, dropdownTestId, label, data, error, inputProps, placeholder }: DropdownProps<T>) {
     const [query, setQuery] = useState('')
-    const [filtered, setFiltered] = useState([])
+    const [filtered, setFiltered] = useState<T[]>([])
     const [showDropdown, setShowDropdown] = useState(false)
     const [activeIndex, setActiveIndex] = useState(-1);
     const inputRef = useRef(null);
-    const [open, setOpen] = useState(false);
 
-    const handleChange = (e: any) => {
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value
         setQuery(value)
-        setFiltered(data.filter((item: any) => item.name.toLowerCase().includes(value.toLowerCase())))
+        setFiltered(data.filter((item: T) => item.name.toLowerCase().includes(value.toLowerCase())))
         setShowDropdown(true)
     }
 
     const handleSelect = (item: any) => {
         setQuery(item.name);
-        setOpen(false);
+        setShowDropdown(false);
         onSelect(item);
     };
 
-    const onKeyDown = (e: any) => {
-        if (e.key === 'ArrowDown') {
-            setOpen(true);
-            setActiveIndex((i) => Math.min(i + 1, filtered.length - 1));
-        }
-        if (e.key === 'ArrowUp') {
-            setActiveIndex((i) => Math.max(i - 1, 0));
-        }
-        if (e.key === 'Enter' && open && activeIndex >= 0) {
-            setOpen(false)
-            handleSelect(filtered[activeIndex]);
-        }
-        if (e.key === 'Escape') {
-            setOpen(false);
-        }
-        if (e.key === 'Tab' && open && activeIndex >= 0) {
-            handleSelect(filtered[activeIndex]);
+    const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        switch (e.key) {
+            case 'ArrowDown':
+                e.preventDefault()
+                setShowDropdown(true);
+                setActiveIndex(i => Math.min(i + 1, filtered.length - 1));
+                break;
+            case 'ArrowUp':
+                e.preventDefault()
+                setActiveIndex(i => Math.max(i - 1, 0));
+                break;
+            case 'Enter':
+                e.preventDefault()
+                if (showDropdown && activeIndex >= 0) {
+                    handleSelect(filtered[activeIndex]);
+                    setShowDropdown(false);
+                }
+                break;
+            case 'Escape':
+                e.preventDefault()
+                setShowDropdown(false);
+                break;
+            case 'Tab':
+                if (showDropdown && activeIndex >= 0) {
+                    handleSelect(filtered[activeIndex]);
+                }
+                break;
         }
     };
 
@@ -65,13 +80,12 @@ const DropdownInput = ({ id, onSelect, testId, dropdownTestId, label, data, erro
                 {...inputProps}
                 data-testid={testId}
                 role="combobox"
-                aria-expanded={open}
+                aria-expanded={showDropdown}
                 aria-controls="country-list"
                 aria-autocomplete="list"
-                aria-activedescendant={open && activeIndex >= 0 ? `option-${activeIndex}` : undefined}
+                aria-activedescendant={showDropdown && activeIndex >= 0 ? `option-${activeIndex}` : undefined}
                 onKeyDown={onKeyDown}
                 onChange={handleChange}
-                onFocus={onKeyDown}
                 onBlur={() => setTimeout(() => setShowDropdown(false), 100)}
                 placeholder={placeholder}
                 className={`
@@ -97,7 +111,7 @@ const DropdownInput = ({ id, onSelect, testId, dropdownTestId, label, data, erro
             />
             {showDropdown && filtered.length > 0 && (
                 <ul data-testid={dropdownTestId} className="absolute z-50 bg-white border border-gray-200 w-full rounded-md mt-1 shadow-md max-h-40 overflow-y-auto">
-                    {filtered.map((item: any, index: number) => (
+                    {filtered.map((item, index: number) => (
                         <li
                             id={`option-${index}`}
                             key={item.code}

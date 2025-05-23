@@ -9,7 +9,8 @@ interface ToggleProps {
     placeholder?: string;
     register?: any;
     inputProps?: React.InputHTMLAttributes<HTMLInputElement>;
-    className?: string
+    className?: string,
+    setValue: any
     icon?: any
 }
 
@@ -19,6 +20,7 @@ const Toggle = ({ id,
     className,
     icon,
     register,
+    setValue,
     inputProps, }: ToggleProps) => {
     return (
         <>
@@ -33,6 +35,13 @@ const Toggle = ({ id,
                     className='sr-only peer'
                     {...register(name)}
                     role="switch"
+                    onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault()
+                            const checked = !((e.target as HTMLInputElement).checked)
+                            setValue(name, checked)
+                        }
+                    }}
                     {...inputProps}
                 />
                 <span className={`slider round`}></span>
