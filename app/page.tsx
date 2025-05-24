@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { motion } from "framer-motion"
-import Header from "@/components/Header";
+import Header from "@/shared/components/Header";
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(false);

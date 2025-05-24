@@ -18,10 +18,10 @@ interface FormStepOneProps {
 }
 
 function FormStepOne({ onNext, defaultValues }: FormStepOneProps) {
-    const { register, handleSubmit, setValue, setError, control, formState: { errors, isSubmitting, isValid } } = useForm<Step1FormValues>({
+    const { register, handleSubmit, setValue, setError, control, formState: { errors, isSubmitting } } = useForm<Step1FormValues>({
         resolver: zodResolver(step1Schema),
         defaultValues,
-        mode: 'onChange',
+        mode: 'onSubmit',
         reValidateMode: 'onChange'
     });
 

@@ -1,6 +1,6 @@
 'use client';
 
-import Header from '@/components/Header';
+import Header from '@/shared/components/Header';
 import { IStep1Values } from '@/interface/formInterface';
 import { AppDispatch, RootState } from '@/store';
 import { goToStep, resetForm, updateFormData } from '@/store/formSlice';
