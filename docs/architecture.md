@@ -5,8 +5,12 @@
 ├─ package-lock.json
 ├─ postcss.config.mjs
 ├─ tailwind.config.js
+├─ jest.config.ts
+├─ jest.setup.ts
 ├─ tsconfig.json
 ├─ next-env.d.ts
+├─ eslint.config.mjs
+├─ cypress.config.ts
 │
 ├─ public/
 │   └─ (static assets…)
@@ -27,11 +31,30 @@
 ├─ components/
 │   ├─ FormStepOne.tsx
 │   └─ FormStepTwo.tsx
+│   
+│   
+├─ __test__/
+│   ├─ FormStepOne.test.tsx
+│   └─ FormStepTwo.test.tsx
+│
+│
+├─ cypress/
+│   ├─ e2e/
+│   │   ├─ multi
+│   │   
+│   │   
+│   ├─ fixtures/
+│   ├─ support/
 │
 ├─ shared/
 │   └─ components/
 │       ├─ InputField.tsx
-│       ├─ SelectField.tsx
+│       ├─ Button.tsx
+│       ├─ DatePicker.tsx
+│       ├─ Dropdown.tsx
+│       ├─ Header.tsx
+│       ├─ Wrapper.tsx
+│       ├─ FormHeader.tsx
 │       └─ Toggle.tsx
 │
 ├─ interface/
@@ -43,6 +66,15 @@
 ├─ schema/
 │   └─ formSchema.ts
 │
+├─ styles/
+│   ├─ toggle.css
+│
+│
+├─ types/
+│   ├─ forms/types.ts
+│   ├─ jest.setup.d.ts
+│   
+│
 ├─ store/
 │   ├─ provider/                ← Redux Provider wrapper
 │   │   └─ (ReduxProvider.tsx)
@@ -50,8 +82,8 @@
 │   └─ index.ts                 ← store setup
 │
 ├─ utils/
+│   ├─ test-helpers.tsx
 │   └─ index.ts                 ← validateFiscalCode.
 │
-└─ docs/                        ← for generated and hand-written docs
-    ├─ index.html               ← TypeDoc output
+└─ docs/                        
     └─ architecture.md          ← folder & data-flow diagrams

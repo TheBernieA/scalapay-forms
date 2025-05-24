@@ -19,14 +19,14 @@ interface FormStepTwoProps {
 }
 
 function FormStepTwo({ onSubmit, defaultValues }: FormStepTwoProps) {
-    const { register, watch, handleSubmit, setValue, formState: { errors, isValid, isSubmitting } } = useForm({
+    const { register, watch, handleSubmit, setValue, formState: { errors, isSubmitting } } = useForm<Step2FormValues>({
         resolver: zodResolver(step2Schema),
         defaultValues: {
             ...defaultValues,
             currentlyLiveHere: defaultValues?.currentlyLiveHere ?? false,
             isPEP: defaultValues?.isPEP ?? false
         },
-        mode: "onChange",
+        mode: "onSubmit",
         reValidateMode: 'onChange'
     });
 
