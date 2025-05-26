@@ -27,14 +27,7 @@ export const store = configureStore({
   reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
-      // Configure the “serializableCheck” middleware, which by default
-      // warns if you dispatch non-plain-JS values (e.g., functions, Promises) :contentReference[oaicite:0]{index=0}
       serializableCheck: {
-        // Redux Persist emits these internal actions (FLUSH, REHYDRATE, etc.)
-        // whose payloads may include non-serializable data.
-        // We list them here so the serializability middleware skips them
-        // and doesn’t log false errors when hydrating or persisting state. :contentReference[oaicite:1]{index=1}
-        //https://redux-toolkit.js.org/usage/usage-guide
         ignoredActions: [
           FLUSH, // flush queued state to storage
           REHYDRATE, // restore state from storage

@@ -110,5 +110,5 @@ Run:
 
 1. Fork the repo and create a feature branch
 2. Write clean, unit-tested code
-3. Open a PR against main; include screenshots if UI changes
+3. Open a PR against development; include screenshots if UI changes
 4. Ensure all CI checks pass (`npm run build`)

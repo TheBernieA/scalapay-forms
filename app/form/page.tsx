@@ -1,6 +1,6 @@
 'use client';
 
-import Header from '@/shared/components/Header';
+// import Header from '@/shared/components/Header';
 import { IStep1Values } from '@/interface/formInterface';
 import { AppDispatch, RootState } from '@/store';
 import { goToStep, resetForm, updateFormData } from '@/store/formSlice';
@@ -14,6 +14,8 @@ import { Bounce, toast } from 'react-toastify';
 
 const FormStepOne = dynamic(() => import('@/components/FormStepOne'))
 const FormStepTwo = dynamic(() => import('@/components/FormStepTwo'))
+const Header = dynamic(() => import('@/shared/components/Header'), { ssr: false });
+
 
 
 function MultiStepFormPage() {

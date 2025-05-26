@@ -11,7 +11,7 @@ const Header = () => {
                     </div>
                 </div>
             </div>
-            <div className="absolute -top-[5px] w-full h-[290px] overflow-hidden">
+            <div className="absolute -top-[-3px] w-full h-[290px] overflow-hidden">
                 <div
                     className="
                          absolute
