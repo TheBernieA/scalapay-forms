@@ -1,6 +1,6 @@
 'use client';
 
-import Header from '@/shared/components/Header';
+// import Header from '@/shared/components/Header';
 import { IStep1Values } from '@/interface/formInterface';
 import { AppDispatch, RootState } from '@/store';
 import { goToStep, resetForm, updateFormData } from '@/store/formSlice';
@@ -14,6 +14,8 @@ import { Bounce, toast } from 'react-toastify';
 
 const FormStepOne = dynamic(() => import('@/components/FormStepOne'))
 const FormStepTwo = dynamic(() => import('@/components/FormStepTwo'))
+const Header = dynamic(() => import('@/shared/components/Header'), { ssr: false });
+
 
 
 function MultiStepFormPage() {
@@ -57,7 +59,7 @@ function MultiStepFormPage() {
                     `Server responded with status ${response.status}`;
                 throw new Error(errMsg);
             }
-            toast.success('Dati inviati con successo!', {
+            toast.success('Data sent!', {
                 autoClose: 1000,
                 transition: Bounce,
                 hideProgressBar: true
@@ -66,7 +68,7 @@ function MultiStepFormPage() {
         } catch (err: unknown) {
             if (err instanceof Error) {
                 console.error('Submit failed:', err);
-                toast.error(`Errore durante l'invio dei dati: ${err.message || 'Si è verificato un errore'}`
+                toast.error(`There was an error : ${err.message || 'Something went wrong'}`
                 )
             }
         }

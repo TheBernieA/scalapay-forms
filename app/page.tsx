@@ -32,17 +32,19 @@ export default function Home() {
               Welcome to Scala Form Filler
             </motion.h1>
 
-            <motion.button
-              onClick={handleLoading}
-              disabled={isLoading}
-              className="inline-block bg-button-primary text-white px-8 py-4 md:px-12 md:py-6 
+            <div className="relative z-20">
+              <motion.button
+                onClick={handleLoading}
+                disabled={isLoading}
+                className="bg-button-primary text-white px-8 py-4 md:px-12 md:py-6 
                      rounded-full text-xl md:text-2xl font-medium shadow-lg cursor-pointer"
-              whileHover={isLoading ? {} : { scale: 1.05 }}
-              whileTap={isLoading ? {} : { scale: 0.95 }}
-              transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-            >
-              START FILLING FORM
-            </motion.button>
+                whileHover={isLoading ? {} : { scale: 1.05 }}
+                whileTap={isLoading ? {} : { scale: 0.95 }}
+                transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+              >
+                START FILLING FORM
+              </motion.button>
+            </div>
 
             <p className="mt-8 text-gray-600 text-xs md:text-base">
               Click the button above to begin your form submission

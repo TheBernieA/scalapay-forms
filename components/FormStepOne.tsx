@@ -28,7 +28,7 @@ function FormStepOne({ onNext, defaultValues }: FormStepOneProps) {
     const onSubmit = async (data: z.infer<typeof step1Schema>) => {
         const isValidFiscal = await validateFiscalCode(data.fiscalCode);
         if (!isValidFiscal) {
-            setError('fiscalCode', { type: 'manual', message: 'Codice fiscale non valido' });
+            setError('fiscalCode', { type: 'manual', message: 'Codice fiscale in not valid' });
             return;
         }
 
