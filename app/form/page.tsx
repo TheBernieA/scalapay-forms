@@ -59,7 +59,7 @@ function MultiStepFormPage() {
                     `Server responded with status ${response.status}`;
                 throw new Error(errMsg);
             }
-            toast.success('Dati inviati con successo!', {
+            toast.success('Data sent!', {
                 autoClose: 1000,
                 transition: Bounce,
                 hideProgressBar: true
@@ -68,7 +68,7 @@ function MultiStepFormPage() {
         } catch (err: unknown) {
             if (err instanceof Error) {
                 console.error('Submit failed:', err);
-                toast.error(`Errore durante l'invio dei dati: ${err.message || 'Si è verificato un errore'}`
+                toast.error(`There was an error : ${err.message || 'Something went wrong'}`
                 )
             }
         }
